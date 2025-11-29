@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
+import MobileNav from "@/components/layout/MobileNav";
+import Providers from "./providers";
 
 const PoppinsSans = Poppins({
     subsets: ["latin"],
@@ -21,11 +23,22 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${PoppinsSans.variable} antialiased`}>
-                <div className="flex h-screen">
-                    <Sidebar />
-                    <main className="flex-1 overflow-auto">{children}</main>
-                </div>
+            <body
+                className={`${PoppinsSans.variable} antialiased min-h-screen overflow-x-hidden`}
+            >
+                <Providers>
+                    <div className="flex min-h-screen w-full max-w-full bg-background overflow-x-hidden">
+                        <div className="hidden lg:flex">
+                            <Sidebar />
+                        </div>
+                        <div className="flex flex-1 flex-col min-w-0">
+                            <MobileNav />
+                            <main className="flex-1 overflow-auto w-full min-w-0">
+                                {children}
+                            </main>
+                        </div>
+                    </div>
+                </Providers>
             </body>
         </html>
     );
