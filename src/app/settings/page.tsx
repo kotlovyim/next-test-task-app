@@ -73,10 +73,6 @@ export default function Settings() {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <div className="text-xs text-muted-foreground mt-2">
-                                        Your password is between 4 and 12
-                                        characters
-                                    </div>
                                     <FormMessage />
                                 </FormItem>
                             )}
