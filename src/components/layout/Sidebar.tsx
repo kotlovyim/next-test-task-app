@@ -3,27 +3,8 @@
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { SidebarContent } from "../ui/sidebar";
 import Link from "next/link";
-import { LayoutDashboard, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
-
-type Link = {
-    icon: React.ReactNode;
-    href: string;
-    label: string;
-};
-
-const links: Link[] = [
-    {
-        icon: <LayoutDashboard />,
-        href: "/",
-        label: "Dashboard",
-    },
-    {
-        icon: <Settings />,
-        href: "/settings",
-        label: "Settings",
-    },
-];
+import { sidebarNav } from "@/constants/sidebar-nav";
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -37,7 +18,8 @@ export default function Sidebar() {
                 <p className="text-lg font-bold">TESTAPP</p>
             </div>
             <nav className="-mx-3">
-                {links.map((link) => {
+                {sidebarNav.map((link) => {
+                    const Icon = link.icon;
                     const isActive = pathname === link.href;
                     return (
                         <Link key={link.href} href={link.href}>
@@ -48,7 +30,7 @@ export default function Sidebar() {
                                         : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                                 }`}
                             >
-                                {link.icon}
+                                <Icon className="size-4" />
                                 {link.label}
                             </div>
                         </Link>
